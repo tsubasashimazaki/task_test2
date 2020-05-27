@@ -13,10 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h2 class="create" style="color: tomato;">Create</h2>
-                    <form method="POST" action="">
+                    <h2 class="create" style="color:tomato;">Create</h2>
+                    <form method="POST" action="{{route('contact.create')}}">
+                    @csrf
                         氏名
                         <input type="text" name="your_name">
+                        <br>
+                        件名
+                        <input type="text" name="title">
                         <br>
                         メールアドレス
                         <input type="email" name="email">
@@ -42,10 +46,8 @@
                         お問い合わせ内容
                         <textarea name="contact"></textarea>
                         <br>
-
                         <input type="checkbox" name="caution" value="1">注意事項に同意する
                         <br>
-
                         <input class="btn btn-info" type="submit" value="登録する" >
                         </form>
                 </div>

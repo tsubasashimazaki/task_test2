@@ -28,8 +28,9 @@ Route::get('contact/index', 'ContactFormController@index');
 // Route::groupメソッドの最初の引数は共通の配列で指定
 Route::group(['prefix' => 'contact', 'middleware' => 'auth'], function(){
     Route::get('index', 'ContactFormController@index')->name('contact.index'); // ルーティングにはカラム修飾子で名前を付けることができる(基本的には 'フォルダ名.ファイル名' )  
-    Route::get('create', 'ContactFormController@create')->name('contact.create'); // ルーティングにはカラム修飾子で名前を付けることができる(基本的には 'フォルダ名.ファイル名' )  
-    Route::get('store', 'ContactFormController@store')->name('contact.store'); // ルーティングにはカラム修飾子で名前を付けることができる(基本的には 'フォルダ名.ファイル名' )  
+    Route::get('create', 'ContactFormController@create')->name('contact.create');
+    // ルーティングはPOST
+    Route::post('store', 'ContactFormController@store')->name('contact.store');
 });
 
 Auth::routes(); //認証の機能

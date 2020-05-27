@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// クラス名ありファイルでもある
+use APP\Models\ContactForm;
 
 class ContactFormController extends Controller
 {
@@ -39,8 +41,22 @@ class ContactFormController extends Controller
     //  リクエストクラス、依存性の注入 一般的なPHP$_POST['your_name']等
     public function store(Request $request)
     {   
-        // homeに登録してある 'your_name' が持ってこれる
-        $your_name = $request->input('your_name');
+        $contact = new ContactForm;
+
+        // $requestに登録してある 'your_name' が持ってこれる
+        $contact->$your_name = $request->input('your_name');
+        $contact->$title = $request->input('title');
+        $contact->$email = $request->input('email');
+        $contact->$url = $request->input('url');
+        $contact->$gender = $request->input('gender');
+        $contact->$age = $request->input('age');
+        $contact->$contact = $request->input('contact');
+
+        dd($your_name);
+
+        $contact->save();
+        // 保存した後に最初のページに飛ばす
+        return redirect('contact/index');
     }
 
     /**
