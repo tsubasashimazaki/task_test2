@@ -13,8 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form method="GET" action="{{route('contact.create')}}">
-                    <button type="submit" class="btn btn-success">新規登録</button>
+                    <!-- laravelの場合Route表記が可能 -->
+                    <form method="GET" action="{{ route('contact.create')}}">
+                    <button type="submit" class="btn btn-primary">新規登録</button>
                     </form>
                     Index
                 </div>

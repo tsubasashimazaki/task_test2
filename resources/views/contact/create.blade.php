@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     <h2 class="create" style="color:tomato;">Create</h2>
-                    <form method="POST" action="{{route('contact.create')}}">
+                    <form method="POST" action="{{ route('contact.store')}}">
                     @csrf
                         氏名
                         <input type="text" name="your_name">
