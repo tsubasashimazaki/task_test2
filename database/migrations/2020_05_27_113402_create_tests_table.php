@@ -27,6 +27,7 @@ class CreateTestsTable extends Migration
             $table->bigIncrements('id');
             $table->string("text", 100);
             $table->timestamps();
+            // migrationファイルを作成した後にテーブルを追加するときはartisan migrate
         });
     }
 
