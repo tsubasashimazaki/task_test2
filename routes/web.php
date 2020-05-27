@@ -12,6 +12,11 @@
 */
 
 // このアドレスにアクセスしたら'welcome'にページに飛ばす
+// 念の為ここのgetはhttpを受け取ったらという意味
 Route::get('/', function () {
     return view('welcome');
 });
+
+// コントローラーで違う場所に飛ばす処理
+// testにアクセしたらTestControllerのindexメソッドを呼びだせ
+Route::get('tests/test', 'TestController@index');
