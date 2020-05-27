@@ -18,7 +18,6 @@ class TestController extends Controller
         $values = Test::all();
         // DBファザードのtableメソッド
         $tests = DB::table('tests')->select('id')->get();
-
         // この処理で止めて変数の中身を表示
         dd($tests);
 

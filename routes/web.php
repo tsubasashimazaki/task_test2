@@ -20,3 +20,6 @@ Route::get('/', function () {
 // コントローラーで違う場所に飛ばす処理
 // testにアクセしたらTestControllerのindexメソッドを呼びだせ
 Route::get('tests/test', 'TestController@index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
