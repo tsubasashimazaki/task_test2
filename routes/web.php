@@ -11,6 +11,7 @@
 |
 */
 
+// このアドレスにアクセスしたら'welcome'にページに飛ばす
 Route::get('/', function () {
     return view('welcome');
 });
