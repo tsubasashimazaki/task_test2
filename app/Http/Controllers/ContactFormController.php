@@ -36,7 +36,7 @@ class ContactFormController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //  リクエストクラス、依存性の注入
+    //  リクエストクラス、依存性の注入 一般的なPHP$_POST['your_name']等
     public function store(Request $request)
     {   
         // homeに登録してある 'your_name' が持ってこれる
