@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // ModelのTestデータを持ってくる為にuse
 use App\Models\Test;
+// クエリビルダ
+use Illuminate\Support\Facades\DB;
+
 
 class TestController extends Controller
 {
@@ -13,15 +16,11 @@ class TestController extends Controller
     {   
         // データベースからデータを表示させる
         $values = Test::all();
-        // collectでグループ分け
-        $collection = collect([1, 2, 3, 4, 5, 6, 7]);
-        // 一つのグループに4つ入れてね
-        $chunks = $collection->chunk(4);
-        // コレクションをPHPの配列に変換
-        $chunks->toArray();
+        // DBファザードのtableメソッド
+        $tests = DB::table('tests')->select('id')->get();
 
         // この処理で止めて変数の中身を表示
-        dd($chunks);
+        dd($tests);
 
         // ビューはresources/viewsディレクトリのサブディレクトリにネスト。
         // ネストしたビューを参照するために「ドット」記法が使える
