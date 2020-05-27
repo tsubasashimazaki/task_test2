@@ -20,6 +20,19 @@ Route::get('/', function () {
 // コントローラーで違う場所に飛ばす処理
 // testにアクセしたらTestControllerのindexメソッドを呼びだせ
 Route::get('tests/test', 'TestController@index');
-Auth::routes();
+// contactフォルダのindexにアクセスが来たらContactFormControllerのindexメソッド実行
+Route::get('contact/index', 'ContactFormController@index');
+
+// prefixでフォルダ指定 contactが頭につくよ 
+// middlewareとauthは認証されたらindexを表示
+// Route::groupメソッドの最初の引数は共通の配列で指定
+Route::group(['prefix' => 'contact', 'middleware' => 'auth'], function(){
+    Route::get('index', 'ContactFormController@index')->name('contact.index'); // ルーティングにはカラム修飾子で名前を付けることができる(基本的には 'フォルダ名.ファイル名' )  
+});
+
+Auth::routes(); //認証の機能
+// Route::resource('contacts', 'contactFormController')->only([
+//     'index', 'show'
+// ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
