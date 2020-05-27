@@ -24,7 +24,9 @@ class ContactFormController extends Controller
      */
     public function create()
     {
-        //
+        //新規作成の場合はページだけ返してあげればOK
+        return view('contact.create');
+
     }
 
     /**
@@ -33,9 +35,12 @@ class ContactFormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //  リクエストクラス、依存性の注入
     public function store(Request $request)
-    {
-        //
+    {   
+        // homeに登録してある 'your_name' が持ってこれる
+        $your_name = $request->input('your_name');
     }
 
     /**
