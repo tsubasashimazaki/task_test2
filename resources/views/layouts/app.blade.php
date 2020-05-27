@@ -1,12 +1,13 @@
 <!doctype html>
+<!-- 文字を変更している -->
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
+    <!-- CSRF Token csrfはlaravelでは絶対入れること-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <!-- configはヘルパ関数 -->
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
