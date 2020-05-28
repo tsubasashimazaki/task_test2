@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // クラス名ありファイル
 use App\Models\ContactForm;
+// クエリビルダ DBのファサードを使える
+use Illuminate\Support\Facades\DB;
+
 
 class ContactFormController extends Controller
 {
@@ -14,12 +17,16 @@ class ContactFormController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $contact = ContactForm::all();
-
-        dd($contact);
+    {   
+        // $contact = ContactForm::all();
+        // 最終的な結果をget()で取得する
+        $contacts = DB::table('contact_forms')
+        ->select('id', 'your_name', 'title', 'created_at')
+        ->orderBy('created_at', 'desc') //テーブルの列の順番を変える
+        ->get();
+        // dd($contacts);
         // indexページを返す
-        return view('contact.index');
+        return view('contact.index', compact('contacts'));
     }
 
     /**

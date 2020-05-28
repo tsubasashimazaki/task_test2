@@ -30,6 +30,8 @@ Route::group(['prefix' => 'contact', 'middleware' => 'auth'], function(){
     Route::get('index', 'ContactFormController@index')->name('contact.index'); // ルーティングにはカラム修飾子で名前を付けることができる(基本的には 'フォルダ名.ファイル名')
     Route::get('create', 'ContactFormController@create')->name('contact.create');
     Route::post('store', 'ContactFormController@store')->name('contact.store');
+    // ルートパラメーターidの詳細確認
+    Route::get('show/{id}', 'ContactFormController@show')->name('contact.show');
 });
 
 Auth::routes(); //認証の機能
