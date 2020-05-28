@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // クラス名ありファイル
 use App\Models\ContactForm;
-// クエリビルダ DBのファサードを使える
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB; // クエリビルダ DBのファサードを使える(->SQLの記述の矢印)
+use App\Services\CheckFormData; //CheckFormDataを使うため記述
 
 
 class ContactFormController extends Controller
@@ -68,7 +68,8 @@ class ContactFormController extends Controller
         $contact->save();
 
         return redirect('contact/index');
-       
+        // ファットコントローラ => 一つのコントローラーの処理が大きくなってしまうこと
+        //スリムにする必要がある
     }
 
     /**
@@ -81,32 +82,9 @@ class ContactFormController extends Controller
     {
         // 一人ずつを出すのでエロクゥアント 
        $contact = ContactForm::find($id); //contactはcreateで入力さされた値
-        // showにgenderやageがvalueの数字で出されてしまうのでif文で数字から文字列に変更
-       if($contact->gender === 0){
-           $gender = '男性';
-       }
-       if($contact->gender === 1){
-           $gender = '女性';
-       }
-
-       if($contact->age === 1){
-           $age = '〜19歳';
-       }
-       if($contact->age === 2){
-           $age = '20〜29歳';
-       }
-       if($contact->age === 3){
-           $age = '30〜39歳';
-       }
-       if($contact->age === 4){
-           $age = '40〜49歳';
-       }
-       if($contact->age === 5){
-           $age = '50〜59歳';
-       }
-       if($contact->age === 6){
-           $age = '60歳〜';
-       }
+       
+        $gender = CheckFormData::checkGender($contact); // staticで指定しているので::でメソッドが使える
+        $age = CheckFormData::checkAge($contact); 
 
        return view('contact.show',
        compact('contact','gender','age')); //変数名(複数可能)とその値から配列を返す 
@@ -120,8 +98,10 @@ class ContactFormController extends Controller
      */
     public function edit($id)
     {
-        //
+        
         $contact = ContactForm::find($id);
+
+        
 
         return view('contact.edit', compact('contact'));
     }
