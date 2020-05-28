@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 // クラス名ありファイル
-use APP\Models\ContactForm;
+use App\Models\ContactForm;
 
 class ContactFormController extends Controller
 {
@@ -15,6 +15,9 @@ class ContactFormController extends Controller
      */
     public function index()
     {
+        $contact = ContactForm::all();
+
+        dd($contact);
         // indexページを返す
         return view('contact.index');
     }
@@ -53,7 +56,7 @@ class ContactFormController extends Controller
         $contact->age = $request->input('age');
         $contact->contact = $request->input('contact');
 
-        dd($your_name);
+        // dd($your_name);
 
         $contact->save();
 
