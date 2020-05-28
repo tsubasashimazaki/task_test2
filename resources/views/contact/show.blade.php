@@ -27,9 +27,31 @@
                        
                         <input class="btn btn-info" type="submit" value="変更する" >
                         </form>
+                        <!-- 最後のidを指定して現在表示しているidを消してもいいかの確認 -->
+                        <form method="POST" action="{{ route('contact.destroy', ['id' => $contact -> id])}}" id="delete_{{ $contact->id}}">
+                        @csrf
+                        <!-- data-idでidを取得 onclickでクリックしたらdeletePost(スレッド全体の削除)実行 -->
+                        <a href="#" class="btn btn-danger" data-id="{{ $contact->id}}" onclick="deletePost('this');">削除する</a>
+                        </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+ /***************************** 
+削除ボタンを押してすぐにデータ削除されるのも
+問題があるので、一旦JavaScroptで
+確認メッセージ表示
+ ***************************** */ 
+
+function deletePost(e) {
+    'use strict';
+    if (confirm('本当に削除してもいいですか？')) {
+        // 消したいIDを持ってきて実行
+        document.getelmentById('delete_' + e.dataset.id).submit();
+    }
+}
+</script>
+
 @endsection

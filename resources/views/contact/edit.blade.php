@@ -36,7 +36,7 @@
                         年齢
                         <select name="age">
                         <option value="">選択してください</option>
-                        <option value="1" @if($contact->age === 1 ) selected @endif>〜19歳</option>
+                        <option value="1" @if($contact->age === 1 ) selected @endif>〜19歳</option><!-- selectedされていたらそれぞれの値 -->
                         <option value="2" @if($contact->age === 2 ) selected @endif>20歳〜29歳</option>
                         <option value="3" @if($contact->age === 3 ) selected @endif>30歳〜39歳</option>
                         <option value="4" @if($contact->age === 4 ) selected @endif>40歳〜49歳</option>

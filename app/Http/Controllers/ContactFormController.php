@@ -161,7 +161,13 @@ class ContactFormController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    
     {
-        //
+        $contact = ContactForm::find($id); //今すでに存在している値
+        $contact->delete(); //データの消し方 deleteメソッド
+
+        return redirect('contact/index');//データベースの更新とデータベースの中を消すのでredirect()
+
+
     }
 }
