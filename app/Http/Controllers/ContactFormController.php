@@ -1,15 +1,15 @@
 <?php
+// ContactFotmControllerはこのフォルダにある この名前空間にある関数だよ namespaceは各ファイルに一つが基本
+namespace App\Http\Controllers; 
 
-namespace App\Http\Controllers;
+use Illuminate\Http\Request; //useには名前空間のインポートや、エイリアス作成時使用
 
-use Illuminate\Http\Request;
-// クラス名ありファイル
 use App\Models\ContactForm;
 use Illuminate\Support\Facades\DB; // クエリビルダ DBのファサードを使える(->SQLの記述の矢印)
 use App\Services\CheckFormData; //CheckFormDataを使うため記述
 
 
-class ContactFormController extends Controller
+class ContactFormController extends Controller //クラスはファイル名と同じにする必要がある
 {
     /**
      * Display a listing of the resource.
