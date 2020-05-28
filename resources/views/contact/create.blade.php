@@ -7,12 +7,24 @@
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
-                <div class="card-body text-center">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
+
+                    @if($errors->any()) <!-- $errorsという変数が元から用意されていてエラーの文字が一つでも入ったら(any) -->
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error) <!-- エラーの全てをとってきてerrorを表示する -->
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    
+
                     <h2 class="create" style="color:tomato;">Create</h2>
                     <form method="POST" action="{{ route('contact.store')}}">
                     @csrf

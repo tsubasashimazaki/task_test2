@@ -7,6 +7,7 @@ use Illuminate\Http\Request; //useには名前空間のインポートや、エ�
 use App\Models\ContactForm;
 use Illuminate\Support\Facades\DB; // クエリビルダ DBのファサードを使える(->SQLの記述の矢印)
 use App\Services\CheckFormData; //CheckFormDataを使うため記述
+use App\Http\Requests\StoreContactForm; //バリデーションファイル読み込み
 
 
 class ContactFormController extends Controller //クラスはファイル名と同じにする必要がある
@@ -49,7 +50,8 @@ class ContactFormController extends Controller //クラスはファイル名と�
      */
 
     //  リクエストクラス、依存性の注入 一般的なPHP$_POST['your_name']等
-    public function store(Request $request)
+    // 引数のStoreContactFormはcreateのinputが送信されて保存される前にバリデーションをかけるためここに記述
+    public function store(StoreContactForm $request)
     {   
 
         $contact = new ContactForm;
