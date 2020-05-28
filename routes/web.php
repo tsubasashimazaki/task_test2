@@ -32,6 +32,8 @@ Route::group(['prefix' => 'contact', 'middleware' => 'auth'], function(){
     Route::post('store', 'ContactFormController@store')->name('contact.store');
     // ルートパラメーターidの詳細確認
     Route::get('show/{id}', 'ContactFormController@show')->name('contact.show');
+    Route::get('edit/{id}', 'ContactFormController@edit')->name('contact.edit');
+    Route::post('update/{id}', 'ContactFormController@update')->name('contact.update');
 });
 
 Auth::routes(); //認証の機能
