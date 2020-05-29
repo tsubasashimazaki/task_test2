@@ -17,6 +17,12 @@
                     <form method="GET" action="{{ route('contact.create')}}">
                     <button type="submit" class="btn btn-primary">新規登録</button>
                     </form>
+                    <!-- データベースの情報を取得したいのでmethod、データベースに登録したいのでGET -->
+                    <!-- actionは検索したら同じページに帰ってきたいのでindexを指定 -->
+                    <form method="GET" action="{{ route('contact.index')}}" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" name="search" type="search" placeholder="検索..." aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+                    </form>
                     
                     <table class="table text-center">
                         <thead>
@@ -41,6 +47,9 @@
                             @endforeach
                         </tbody>
                         </table>
+
+                        {{ $contacts->links() }}
+
                 </div>
             </div>
         </div>

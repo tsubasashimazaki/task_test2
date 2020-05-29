@@ -17,15 +17,42 @@ class ContactFormController extends Controller //クラスはファイル名と�
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    // リクエストクラスのインスタンスでデータを持ってくる
+    public function index(Request $request)
     {   
+        $search = $request->input('search');// indexの検索欄のsearchで入ってきたものを$search変数に入れる
+
+
+
         // $contact = ContactForm::all();
         // 最終的な結果をget()で取得する
-        $contacts = DB::table('contact_forms')
-        ->select('id', 'your_name', 'title', 'created_at')
-        ->orderBy('created_at', 'desc') //テーブルの列の順番を変える
-        ->get();
-        // dd($contacts);
+        // $contacts = DB::table('contact_forms')
+        // ->select('id', 'your_name', 'title', 'created_at')
+        // ->orderBy('created_at', 'desc') //テーブルの列の順番を変える
+        // ->paginate(20);
+
+        //検索フォーム
+        $query = DB::table('contact_forms');
+        // $searchがnull='空白'じゃなかったらif文
+        // 空白であれば通常のpagination
+        if($search !== null){
+            // 全角スペースを半角に変更する記述
+            $search_split = mb_convert_kana($search, 's');
+
+            $search_split2 = preg_split('/[\s]+/', $search_split,-1,PREG_SPLIT_NO_EMPTY); //PREG_SPLIT_NO_EMPTY=空文字でないものが変数に渡される
+
+            //単語をループで回す
+            foreach($search_split2 as $value)
+            {
+                $query->where('your_name', 'like', '%'.$value.'%');
+            }
+        }
+
+
+        $query->select('id', 'your_name', 'title', 'created_at');
+        $query->orderBy('created_at', 'asc');
+        $contacts = $query->paginate(20);
+
         // indexページを返す
         return view('contact.index', compact('contacts'));
     }
